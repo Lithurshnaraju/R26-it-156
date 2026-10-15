@@ -1,4 +1,4 @@
-# AquaGuard + Vision Sentry AI: Windows Setup Guide
+# AquaGuard Windows Setup Guide
 
 This project is two systems linked together:
 
