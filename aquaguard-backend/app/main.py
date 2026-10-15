@@ -23,7 +23,7 @@ from app.routes import detect, analytics
 async def lifespan(app: FastAPI):
     """
     This runs when the server STARTS and STOPS.
-    On startup: create database tables + load the YOLOv8 model.
+    On startup: create database tables + load the YOLOv11-nano model.
     """
     # === SERVER STARTING ===
     print("=" * 50)
@@ -33,12 +33,12 @@ async def lifespan(app: FastAPI):
     # Create database tables
     await init_db()
 
-    # Load the YOLOv8 model
+    # Load the YOLOv11-nano model
     if os.path.exists(MODEL_PATH):
         load_model(MODEL_PATH)
     else:
         print(f"\n⚠️  WARNING: Model file '{MODEL_PATH}' not found!")
-        print("   Download best.pt from Google Colab and put it in the project folder.")
+        print("   Download best.pt from the Kaggle training output and put it in the project folder.")
         print("   The /detect endpoint will not work without the model.\n")
 
     print("\n✅ AquaGuard backend is ready!")
@@ -54,13 +54,13 @@ async def lifespan(app: FastAPI):
 app = FastAPI(
     title="AquaGuard API",
     description="""
-    ## Real-Time River Garbage Detection & Drowning Risk Assessment
+    ## Real-Time River Garbage Detection & Pollution Severity Assessment
 
     **How to use this API:**
 
     1. **Upload an image** → `POST /api/v1/detect`
        - Upload any photo of a river or garbage
-       - Get back: detected objects, GDI score, DRI score, alert level
+       - Get back: detected objects, GDI score, pollution level
 
     2. **View history** → `GET /api/v1/detections`
        - See all past detection scans
@@ -69,15 +69,15 @@ app = FastAPI(
        - Get overall statistics for the dashboard
 
     **Key Concepts:**
-    - **GDI (Garbage Density Index):** How much garbage is in the water (0-100)
-    - **DRI (Drowning Risk Index):** How dangerous it is for swimmers (0-100)
-    - **Alert Tiers:** none → yellow → orange → red
+    - **GDI (Garbage Density Index):** A weighted pollution severity score (0-100)
+      based on detection confidence, garbage danger weight and image area
+    - **Pollution Levels:** low (0-25) → moderate (25-50) → high (50-75) → critical (75-100)
     """,
     version="1.0.0",
     lifespan=lifespan,
 )
 
-# Allow React Native mobile app to connect (CORS)
+# Allow the web and mobile app to connect (CORS)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],         # Allow all origins for demo
@@ -103,13 +103,13 @@ async def root():
     """🏠 Home — shows project info and available endpoints."""
     return {
         "project": "AquaGuard",
-        "description": "Real-Time River Garbage Detection & Drowning Risk Assessment System",
+        "description": "Real-Time River Garbage Detection & Pollution Severity Assessment System",
         "version": "1.0.0",
         "tech_stack": {
-            "model": "YOLOv8-nano (trained on 2,450 images)",
+            "model": "YOLOv11-nano (trained on ~8,900 images, 90.3% mAP@0.5)",
             "backend": "Python FastAPI",
             "database": "SQLite (async)",
-            "classes": ["plastic", "glass", "metal", "paper/polythene"],
+            "classes": ["glass", "metal", "plastic", "polythene"],
         },
         "api_docs": "Visit /docs for interactive API documentation",
         "endpoints": {

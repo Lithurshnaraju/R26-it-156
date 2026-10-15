@@ -9,7 +9,7 @@ export default function ScanAnimation({ preview }) {
       </div>
       <div className="scan-pulse" />
       <div className="scan-text">Analyzing image...</div>
-      <div className="scan-sub">Detecting garbage objects with YOLOv8</div>
+      <div className="scan-sub">Detecting garbage objects with YOLOv11</div>
     </div>
   );
 }

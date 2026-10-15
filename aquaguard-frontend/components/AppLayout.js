@@ -9,6 +9,7 @@ import ResultsModal from './ResultsModal';
 import ScanAnimation from './ScanAnimation';
 
 const API = '/api/v1';
+const SENTRY_URL = 'http://localhost:5173';
 
 export default function AppLayout({ user, onLogout }) {
   const [page, setPage] = useState('home');
@@ -66,7 +67,7 @@ export default function AppLayout({ user, onLogout }) {
     loadHistory();
   }, []);
 
-  const titles = { home:'Dashboard', history:'Scan History', about:'About Scanner', alerts:'Pollution Alerts' };
+  const titles = { home:'Dashboard', history:'Scan History', about:'About Scanner', alerts:'Pollution Alerts', sentry:'Vision Sentry AI' };
 
   const alertCount = history.filter(h => (h.gdi_score || 0) >= 50).length;
 
@@ -157,6 +158,9 @@ export default function AppLayout({ user, onLogout }) {
           <button className={`sb-item ${page==='history'?'active':''}`} onClick={()=>nav('history')}>
             <span className="icon">📋</span> Scan History
           </button>
+          <button className="sb-item" onClick={() => window.open(SENTRY_URL, '_blank', 'noopener,noreferrer')}>
+  <span className="icon">🛡️</span> Vision Sentry AI <span style={{marginLeft:'auto',opacity:0.6}}>↗</span>
+</button>
           <button className={`sb-item ${page==='about'?'active':''}`} onClick={()=>nav('about')}>
             <span className="icon">ℹ️</span> About Scanner
           </button>
@@ -189,6 +193,20 @@ export default function AppLayout({ user, onLogout }) {
           {page==='alerts' && <AlertsPage history={history} onRescan={handleRescan} />}
           {page==='history' && <ScanHistory history={history} onView={viewHistoryItem} actions={actionButtons} />}
           {page==='about' && <AboutScanner />}
+          {page==='sentry' && (
+            <iframe
+              src={SENTRY_URL}
+              title="Vision Sentry AI"
+              allow="fullscreen; autoplay"
+              style={{
+                width: '100%',
+                height: 'calc(100vh - 120px)',
+                border: 'none',
+                borderRadius: 12,
+                background: '#0b1220',
+              }}
+            />
+          )}
         </div>
       </div>
 
