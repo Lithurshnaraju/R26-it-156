@@ -1,7 +1,7 @@
 @echo off
 title AI Surveillance Backend API (FastAPI)
 echo ============================================================
-echo Starting AI Surveillance & Threat Detection Backend API...
+echo Starting AI Surveillance ^& Threat Detection Backend API...
 echo ============================================================
 cd /d "%~dp0"
 
@@ -20,5 +20,5 @@ if exist "%USERPROFILE%\miniconda3\python.exe" (
 )
 
 echo Using Python interpreter: %PYTHON_EXE%
-"%PYTHON_EXE%" -m uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
+"%PYTHON_EXE%" -m uvicorn backend.main:app --host 0.0.0.0 --port 8001
 pause
