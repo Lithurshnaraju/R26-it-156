@@ -1,0 +1,31 @@
+{
+    "model_name": "crowd_yolo11",
+    "model_type": "YOLO11 object detection",
+    "framework": "Ultralytics YOLO",
+    "task": "object_detection",
+    "model_files": {
+        "pytorch": "crowd_yolo11.pt",
+        "onnx": "crowd_yolo11.onnx",
+        "pytorch_state_dict": "crowd_yolo11.pth"
+    },
+    "input": {
+        "image_size": 960,
+        "color_format": "BGR_to_RGB",
+        "normalization": "0-1"
+    },
+    "detection": {
+        "confidence_threshold": 0.35,
+        "iou_threshold": 0.5
+    },
+    "counting": {
+        "enabled": true,
+        "count_method": "number_of_person_detections"
+    },
+    "tracking": {
+        "enabled": true,
+        "tracker": "bytetrack.yaml"
+    },
+    "classes": {
+        "0": "people_counterv0 - v1 2023-05-18 6-22pm"
+    }
+}

@@ -22,15 +22,15 @@ export const AlertCenter = ({ alerts = [], onSelectAlert, onAlertAck }) => {
   };
 
   return (
-    <div className="bg-[#0f1422] rounded-2xl border border-slate-800/90 shadow-xl flex flex-col h-full">
-      <div className="px-4 py-3.5 border-b border-slate-800 flex items-center justify-between">
+    <div className="bg-white rounded-2xl border border-slate-200 shadow-xl flex flex-col h-full">
+      <div className="px-4 py-3.5 border-b border-slate-200 flex items-center justify-between">
         <div className="flex items-center space-x-2">
-          <ShieldAlert className="w-4 h-4 text-cyan-400" />
-          <h3 className="text-sm font-bold text-white uppercase tracking-wide">
+          <ShieldAlert className="w-4 h-4 text-cyan-700" />
+          <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wide">
             Real-Time Alert Feed
           </h3>
         </div>
-        <span className="text-xs font-mono text-slate-400">
+        <span className="text-xs font-mono text-slate-500">
           {alerts.length} events logged
         </span>
       </div>
@@ -38,7 +38,7 @@ export const AlertCenter = ({ alerts = [], onSelectAlert, onAlertAck }) => {
       <div className="p-3 overflow-y-auto space-y-2.5 max-h-[460px] flex-1">
         {alerts.length === 0 ? (
           <div className="text-center py-10 text-slate-500 text-xs">
-            <Check className="w-8 h-8 mx-auto mb-2 opacity-40 text-emerald-400" />
+            <Check className="w-8 h-8 mx-auto mb-2 opacity-40 text-emerald-600" />
             No security or drowning incidents recorded.
           </div>
         ) : (
@@ -50,39 +50,39 @@ export const AlertCenter = ({ alerts = [], onSelectAlert, onAlertAck }) => {
                 onClick={() => onSelectAlert(alert)}
                 className={`p-3 rounded-xl border transition-all cursor-pointer hover:scale-[1.01] ${
                   isCritical
-                    ? 'bg-red-950/40 border-red-800/80 hover:bg-red-950/60'
-                    : 'bg-amber-950/30 border-amber-800/60 hover:bg-amber-950/50'
+                    ? 'bg-red-50 border-red-200 hover:bg-red-100'
+                    : 'bg-amber-50 border-amber-200 hover:bg-amber-100'
                 }`}
               >
                 <div className="flex items-start justify-between gap-2">
                   <div className="flex items-center space-x-2">
                     {isCritical ? (
-                      <ShieldAlert className="w-4 h-4 text-red-400 shrink-0 animate-pulse" />
+                      <ShieldAlert className="w-4 h-4 text-red-600 shrink-0 animate-pulse" />
                     ) : (
-                      <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0" />
+                      <AlertTriangle className="w-4 h-4 text-amber-700 shrink-0" />
                     )}
-                    <span className="text-xs font-bold text-white">
+                    <span className="text-xs font-bold text-slate-900">
                       {alert.title}
                     </span>
                   </div>
-                  <span className="text-[10px] font-mono text-slate-400 shrink-0">
+                  <span className="text-[10px] font-mono text-slate-500 shrink-0">
                     {new Date(alert.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
                   </span>
                 </div>
 
-                <p className="text-xs text-slate-300 mt-1 line-clamp-2">
+                <p className="text-xs text-slate-700 mt-1 line-clamp-2">
                   {alert.message}
                 </p>
 
-                <div className="mt-2.5 pt-2 border-t border-slate-800/60 flex items-center justify-between text-[11px]">
+                <div className="mt-2.5 pt-2 border-t border-slate-200 flex items-center justify-between text-[11px]">
                   <div className="flex items-center space-x-2">
                     <span className={`px-1.5 py-0.5 rounded text-[10px] font-mono font-bold ${
-                      isCritical ? 'bg-red-500/30 text-red-300' : 'bg-amber-500/30 text-amber-300'
+                      isCritical ? 'bg-red-500/15 text-red-700' : 'bg-amber-500/15 text-amber-700'
                     }`}>
                       {alert.threat_level}
                     </span>
                     {alert.snapshot_filename && (
-                      <span className="flex items-center space-x-1 text-slate-400">
+                      <span className="flex items-center space-x-1 text-slate-500">
                         <Camera className="w-3 h-3" />
                         <span>Snapshot</span>
                       </span>
@@ -92,7 +92,7 @@ export const AlertCenter = ({ alerts = [], onSelectAlert, onAlertAck }) => {
                   {!alert.is_acknowledged && (
                     <button
                       onClick={(e) => handleAck(e, alert.id)}
-                      className="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition font-medium"
+                      className="px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-300 text-slate-700 hover:text-slate-900 transition font-medium"
                     >
                       Acknowledge
                     </button>

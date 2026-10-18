@@ -26,21 +26,21 @@ export const ThreatRadar = ({ stats = {} }) => {
   const distPercent = minDistance !== null ? Math.min(100, Math.max(10, (minDistance / 350) * 100)) : 100;
 
   return (
-    <div className="bg-[#0f1422] rounded-2xl border border-slate-800/90 shadow-xl p-5 flex flex-col space-y-4">
+    <div className="bg-white rounded-2xl border border-slate-200 shadow-xl p-5 flex flex-col space-y-4">
       {/* Header */}
-      <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+      <div className="flex items-center justify-between pb-3 border-b border-slate-200">
         <div className="flex items-center space-x-2">
-          <Radar className="w-5 h-5 text-amber-400 animate-spin-slow" />
-          <h3 className="text-sm font-bold text-white uppercase tracking-wide">
+          <Radar className="w-5 h-5 text-amber-700 animate-spin-slow" />
+          <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wide">
             Threat & Proximity Radar
           </h3>
         </div>
         <span className={`text-xs font-mono font-bold px-2.5 py-1 rounded-full border ${
           isCritical
-            ? 'bg-red-500/20 text-red-400 border-red-500/40 animate-pulse'
+            ? 'bg-red-500/20 text-red-600 border-red-500/40 animate-pulse'
             : isWarning
-            ? 'bg-amber-500/20 text-amber-400 border-amber-500/40'
-            : 'bg-emerald-500/20 text-emerald-400 border-emerald-500/40'
+            ? 'bg-amber-500/20 text-amber-700 border-amber-500/40'
+            : 'bg-emerald-500/20 text-emerald-600 border-emerald-500/40'
         }`}>
           {threatLevel}
         </span>
@@ -49,10 +49,10 @@ export const ThreatRadar = ({ stats = {} }) => {
       {/* Main Threat Status Banner */}
       <div className={`p-4 rounded-xl border flex items-center space-x-3.5 transition-all ${
         isCritical
-          ? 'bg-red-950/40 border-red-800/80 text-red-200'
+          ? 'bg-red-50 border-red-200 text-red-800'
           : isWarning
-          ? 'bg-amber-950/40 border-amber-800/80 text-amber-200'
-          : 'bg-slate-900/60 border-slate-800 text-slate-300'
+          ? 'bg-amber-50 border-amber-200 text-amber-800'
+          : 'bg-slate-50 border-slate-200 text-slate-700'
       }`}>
         <div className={`p-2.5 rounded-xl ${
           isCritical ? 'bg-red-600 text-white' : isWarning ? 'bg-amber-600 text-white' : 'bg-emerald-600 text-white'
@@ -70,23 +70,23 @@ export const ThreatRadar = ({ stats = {} }) => {
       </div>
 
       {/* Visual Proximity Meter (When both Animal and Human are detected) */}
-      <div className="bg-slate-950/70 p-4 rounded-xl border border-slate-800/70 space-y-2">
+      <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
         <div className="flex items-center justify-between text-xs font-mono">
-          <span className="text-slate-400 flex items-center gap-1.5">
-            <Target className="w-3.5 h-3.5 text-cyan-400" />
+          <span className="text-slate-500 flex items-center gap-1.5">
+            <Target className="w-3.5 h-3.5 text-cyan-700" />
             Human-Animal Distance:
           </span>
-          <span className="font-bold text-white">
+          <span className="font-bold text-slate-900">
             {minDistance !== null ? `${Math.round(minDistance)} px` : 'N/A (No pair in frame)'}
           </span>
         </div>
 
         {/* Distance Bar */}
-        <div className="w-full bg-slate-800 h-3 rounded-full overflow-hidden p-0.5 relative">
+        <div className="w-full bg-slate-200 h-3 rounded-full overflow-hidden p-0.5 relative">
           <div
             className={`h-full rounded-full transition-all duration-300 ${
               minDistance === null
-                ? 'w-full bg-slate-700'
+                ? 'w-full bg-slate-300'
                 : minDistance <= 220
                 ? 'bg-gradient-to-r from-red-600 to-rose-500 animate-pulse'
                 : 'bg-gradient-to-r from-amber-500 to-emerald-500'
@@ -104,30 +104,30 @@ export const ThreatRadar = ({ stats = {} }) => {
 
       {/* Detections Counts Grid */}
       <div className="grid grid-cols-2 gap-3">
-        <div className="bg-slate-900/60 p-3.5 rounded-xl border border-slate-800 flex items-center space-x-3">
-          <div className="p-2 rounded-lg bg-amber-500/10 text-amber-400 border border-amber-500/20">
+        <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-200 flex items-center space-x-3">
+          <div className="p-2 rounded-lg bg-amber-500/10 text-amber-700 border border-amber-500/20">
             <Footprints className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-[11px] text-slate-400 uppercase font-mono">Wild Animals</div>
-            <div className="text-xl font-bold text-white font-mono">{animalsCount}</div>
+            <div className="text-[11px] text-slate-500 uppercase font-mono">Wild Animals</div>
+            <div className="text-xl font-bold text-slate-900 font-mono">{animalsCount}</div>
           </div>
         </div>
 
-        <div className="bg-slate-900/60 p-3.5 rounded-xl border border-slate-800 flex items-center space-x-3">
-          <div className="p-2 rounded-lg bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+        <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-200 flex items-center space-x-3">
+          <div className="p-2 rounded-lg bg-cyan-500/10 text-cyan-700 border border-cyan-500/20">
             <Users className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-[11px] text-slate-400 uppercase font-mono">Humans On-Site</div>
-            <div className="text-xl font-bold text-white font-mono">{humansCount}</div>
+            <div className="text-[11px] text-slate-500 uppercase font-mono">Humans On-Site</div>
+            <div className="text-xl font-bold text-slate-900 font-mono">{humansCount}</div>
           </div>
         </div>
       </div>
 
       {/* Identified Species Tags */}
       <div className="space-y-1.5">
-        <div className="text-[11px] text-slate-400 uppercase font-mono font-semibold">
+        <div className="text-[11px] text-slate-500 uppercase font-mono font-semibold">
           Identified Species in Perimeter:
         </div>
         <div className="flex flex-wrap gap-1.5">
@@ -135,7 +135,7 @@ export const ThreatRadar = ({ stats = {} }) => {
             detectedAnimals.map((animal, idx) => (
               <span
                 key={idx}
-                className="text-xs bg-amber-950/60 text-amber-300 border border-amber-700/60 px-2.5 py-1 rounded-lg font-medium"
+                className="text-xs bg-amber-50 text-amber-800 border border-amber-300 px-2.5 py-1 rounded-lg font-medium"
               >
                 🐾 {animal}
               </span>
@@ -147,8 +147,8 @@ export const ThreatRadar = ({ stats = {} }) => {
       </div>
 
       {/* Action Advisory */}
-      <div className="pt-2 border-t border-slate-800/80 text-xs text-slate-400">
-        <strong className="text-slate-300">Automated Protocol:</strong>{' '}
+      <div className="pt-2 border-t border-slate-200 text-xs text-slate-500">
+        <strong className="text-slate-700">Automated Protocol:</strong>{' '}
         {isCritical
           ? 'Dispatch immediate loudspeaker warning & security intervention team.'
           : isWarning

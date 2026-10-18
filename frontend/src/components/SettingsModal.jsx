@@ -34,27 +34,27 @@ export const SettingsModal = ({ onClose, onSaved }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-      <div className="bg-[#0f1422] border border-slate-800 rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl">
-        <div className="px-6 py-4 bg-slate-900 border-b border-slate-800 flex items-center justify-between">
+    <div className="fixed inset-0 z-50 bg-slate-50 backdrop-blur-sm flex items-center justify-center p-4">
+      <div className="bg-white border border-slate-200 rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl">
+        <div className="px-6 py-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
           <div className="flex items-center space-x-2.5">
-            <Sliders className="w-5 h-5 text-cyan-400" />
-            <h3 className="text-base font-bold text-white">AI Vision & Detection Settings</h3>
+            <Sliders className="w-5 h-5 text-cyan-700" />
+            <h3 className="text-base font-bold text-slate-900">AI Vision & Detection Settings</h3>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition"
+            className="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-200 transition"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        <div className="p-6 space-y-5 text-xs text-slate-300">
+        <div className="p-6 space-y-5 text-xs text-slate-700">
           {/* Drowning Confidence */}
           <div className="space-y-2">
             <div className="flex justify-between font-mono">
-              <label className="text-slate-200 font-semibold">Drowning Detection Confidence:</label>
-              <span className="text-cyan-400 font-bold">{drowningConf}%</span>
+              <label className="text-slate-800 font-semibold">Drowning Detection Confidence:</label>
+              <span className="text-cyan-700 font-bold">{drowningConf}%</span>
             </div>
             <input
               type="range"
@@ -71,8 +71,8 @@ export const SettingsModal = ({ onClose, onSaved }) => {
           {/* Animal Confidence */}
           <div className="space-y-2">
             <div className="flex justify-between font-mono">
-              <label className="text-slate-200 font-semibold">Animal Detection Confidence:</label>
-              <span className="text-amber-400 font-bold">{animalConf}%</span>
+              <label className="text-slate-800 font-semibold">Animal Detection Confidence:</label>
+              <span className="text-amber-700 font-bold">{animalConf}%</span>
             </div>
             <input
               type="range"
@@ -89,8 +89,8 @@ export const SettingsModal = ({ onClose, onSaved }) => {
           {/* Human Confidence */}
           <div className="space-y-2">
             <div className="flex justify-between font-mono">
-              <label className="text-slate-200 font-semibold">Human Detection Confidence:</label>
-              <span className="text-blue-400 font-bold">{humanConf}%</span>
+              <label className="text-slate-800 font-semibold">Human Detection Confidence:</label>
+              <span className="text-blue-600 font-bold">{humanConf}%</span>
             </div>
             <input
               type="range"
@@ -106,8 +106,8 @@ export const SettingsModal = ({ onClose, onSaved }) => {
           {/* Proximity Distance Threshold */}
           <div className="space-y-2">
             <div className="flex justify-between font-mono">
-              <label className="text-slate-200 font-semibold">Animal-Human Attack Proximity Limit:</label>
-              <span className="text-red-400 font-bold">{proximityDist} px</span>
+              <label className="text-slate-800 font-semibold">Animal-Human Attack Proximity Limit:</label>
+              <span className="text-red-600 font-bold">{proximityDist} px</span>
             </div>
             <input
               type="range"
@@ -122,10 +122,10 @@ export const SettingsModal = ({ onClose, onSaved }) => {
           </div>
         </div>
 
-        <div className="p-4 bg-slate-950/80 border-t border-slate-800 flex justify-end space-x-3">
+        <div className="p-4 bg-slate-50 border-t border-slate-200 flex justify-end space-x-3">
           <button
             onClick={onClose}
-            className="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition"
+            className="px-4 py-2 rounded-lg bg-slate-100 hover:bg-slate-300 text-slate-700 text-xs font-semibold transition"
           >
             Cancel
           </button>

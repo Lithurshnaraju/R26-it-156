@@ -8,11 +8,13 @@ import { IncidentLog } from './components/IncidentLog';
 import { SnapshotModal } from './components/SnapshotModal';
 import { SettingsModal } from './components/SettingsModal';
 import { UploadModal } from './components/UploadModal';
+import CrowdMonitor from './CrowdMonitor';
+import { ChatWidget } from './components/crowd/ChatWidget';
 import { useAlertWebSocket } from './hooks/useWebSocket';
 import { getAlerts, getAlertStats, getAvailableVideos, getStreamStats, controlStream } from './services/api';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('animal_human'); // 'animal_human' | 'drowning' | 'dual' | 'logs'
+  const [activeTab, setActiveTab] = useState('animal_human'); // 'animal_human' | 'drowning' | 'dual' | 'logs' | 'crowd'
   const [isAudioEnabled, setIsAudioEnabled] = useState(true);
   const [alerts, setAlerts] = useState([]);
   const [stats, setStats] = useState({ total: 0, critical: 0, warning: 0, drowning_incidents: 0, animal_threat_incidents: 0 });
@@ -112,7 +114,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#070a11] text-slate-100">
+    <div className="min-h-screen flex flex-col bg-white text-slate-900">
       {/* Top Header */}
       <Header
         isConnected={isConnected}
@@ -127,6 +129,8 @@ export default function App() {
 
       {/* Main Content Area */}
       <main className="flex-1 p-4 lg:p-8 max-w-[1700px] w-full mx-auto space-y-6">
+        {activeTab === 'crowd' && <CrowdMonitor />}
+
         {/* VIEW 1: Wildlife Threat Surveillance */}
         {activeTab === 'animal_human' && (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -255,6 +259,7 @@ export default function App() {
           onUploadSuccess={handleUploadSuccess}
         />
       )}
+      <ChatWidget />
     </div>
   );
 }

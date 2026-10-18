@@ -88,15 +88,15 @@ export const LivePlayer = ({
     : (streamSource === 'webcam' ? 'Live Webcam' : (streamSource === 'sample' ? 'Default Demo Video' : 'Custom Video Feed'));
 
   return (
-    <div className="bg-[#0f1422] rounded-2xl border border-slate-800/90 shadow-xl overflow-hidden flex flex-col">
+    <div className="bg-white rounded-2xl border border-slate-200 shadow-xl overflow-hidden flex flex-col">
       {/* Video Header Bar */}
-      <div className="px-4 py-3 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between gap-2 flex-wrap">
+      <div className="px-4 py-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between gap-2 flex-wrap">
         <div className="flex items-center space-x-2.5">
           <div className="flex h-2.5 w-2.5 relative">
             <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${isPlaying ? 'bg-emerald-400' : 'bg-slate-500'}`}></span>
             <span className={`relative inline-flex rounded-full h-2.5 w-2.5 ${isPlaying ? 'bg-emerald-500' : 'bg-slate-500'}`}></span>
           </div>
-          <h2 className="text-sm font-bold text-white tracking-wide uppercase">{title}</h2>
+          <h2 className="text-sm font-bold text-slate-900 tracking-wide uppercase">{title}</h2>
           <span className={`text-[10px] uppercase font-bold px-2 py-0.5 rounded border bg-${badgeColor}-500/10 text-${badgeColor}-400 border-${badgeColor}-500/30`}>
             {badge}
           </span>
@@ -107,7 +107,7 @@ export const LivePlayer = ({
           <select
             value={streamSource}
             onChange={(e) => handleSourceSelect(e.target.value)}
-            className="text-xs bg-slate-800 text-slate-200 border border-slate-700 rounded-lg px-2.5 py-1 focus:outline-none focus:border-cyan-500 max-w-[220px] truncate"
+            className="text-xs bg-slate-100 text-slate-800 border border-slate-300 rounded-lg px-2.5 py-1 focus:outline-none focus:border-cyan-500 max-w-[220px] truncate"
           >
             <option value="sample">📹 Default Footage</option>
             <option value="webcam">🎥 Live Webcam</option>
@@ -190,15 +190,15 @@ export const LivePlayer = ({
       </div>
 
       {/* Video Footer Metadata & Quick Stats */}
-      <div className="px-4 py-2.5 bg-slate-950/60 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+      <div className="px-4 py-2.5 bg-slate-50 border-t border-slate-200 flex items-center justify-between text-xs text-slate-500">
         <div className="flex items-center space-x-4 font-mono truncate">
-          <span>FPS: <strong className="text-slate-200">~25</strong></span>
-          <span className="truncate">Active Source: <strong className="text-cyan-400">{currentDisplayName}</strong></span>
+          <span>FPS: <strong className="text-slate-800">~25</strong></span>
+          <span className="truncate">Active Source: <strong className="text-cyan-700">{currentDisplayName}</strong></span>
         </div>
         <div className="flex items-center space-x-2 shrink-0">
           <button
             onClick={handleRestart}
-            className="flex items-center space-x-1 text-cyan-400 hover:text-cyan-300 font-semibold"
+            className="flex items-center space-x-1 text-cyan-700 hover:text-cyan-800 font-semibold"
           >
             <RotateCcw className="w-3 h-3" />
             <span>Reset Loop</span>
